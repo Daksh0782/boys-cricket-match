@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boys Cricket Match</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#eef5ee;
+}
+header{
+    background:#087f23;
+    color:white;
+    text-align:center;
+    padding:25px 10px;
+}
+.container{
+    max-width:500px;
+    margin:20px auto;
+    padding:15px;
+}
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:18px;
+    border-radius:15px;
+    box-shadow:0 3px 12px #bbb;
+}
+h2{
+    color:#087f23;
+}
+.match{
+    background:#e8f5e9;
+    padding:15px;
+    border-radius:12px;
+}
+.info{
+    font-size:18px;
+    margin:13px 0;
+}
+input,textarea,button{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    margin:7px 0;
+    border-radius:8px;
+    border:1px solid #bbb;
+    font-size:15px;
+}
+button{
+    background:#087f23;
+    color:white;
+    border:none;
+    font-weight:bold;
+}
+button:active{
+    background:#055c19;
+}
+#adminPanel{
+    display:none;
+}
+.message{
+    background:#f1f8e9;
+    padding:10px;
+    margin-top:8px;
+    border-radius:8px;
+}
+.small{
+    color:#777;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏏 Boys Cricket Match</h1>
+    <p>Match Information & Messages</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>🏆 Match Details</h2>
+
+<div class="match">
+<div class="info"><b>Team 1:</b> <span id="team1">Team A</span></div>
+<div class="info"><b>Team 2:</b> <span id="team2">Team B</span></div>
+<div class="info"><b>📅 Date:</b> <span id="date">30 September 2026</span></div>
+<div class="info"><b>⏰ Time:</b> <span id="time">3:00 PM</span></div>
+</div>
+
+<p class="small">Only the administrator can change match details.</p>
+</div>
+
+<div class="card">
+<h2>💬 Message About Match</h2>
+
+<input id="name" placeholder="Your name">
+
+<textarea id="msg" rows="4"
+placeholder="Write your message..."></textarea>
+
+<button onclick="sendMessage()">Send Message</button>
+
+<div id="messages"></div>
+</div>
+
+<div class="card">
+<h2>⚙️ Admin</h2>
+
+<button onclick="login()">Admin Login</button>
+
+<div id="adminPanel">
+
+<input id="newTeam1" placeholder="Team 1">
+<input id="newTeam2" placeholder="Team 2">
+<input id="newDate" type="date">
+<input id="newTime" type="time">
+
+<button onclick="updateMatch()">Update Match</button>
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+const PASSWORD = "12345";
+
+function login(){
+
+    let password = prompt("Enter Admin Password:");
+
+    if(password === PASSWORD){
+        document.getElementById("adminPanel").style.display="block";
+        alert("Admin login successful!");
+    }
+    else{
+        alert("Wrong password!");
+    }
+}
+
+function updateMatch(){
+
+    let t1=document.getElementById("newTeam1").value;
+    let t2=document.getElementById("newTeam2").value;
+    let d=document.getElementById("newDate").value;
+    let t=document.getElementById("newTime").value;
+
+    if(t1) document.getElementById("team1").innerText=t1;
+    if(t2) document.getElementById("team2").innerText=t2;
+    if(d) document.getElementById("date").innerText=d;
+    if(t) document.getElementById("time").innerText=t;
+
+    alert("Match details updated!");
+}
+
+function sendMessage(){
+
+    let name=document.getElementById("name").value;
+    let msg=document.getElementById("msg").value;
+
+    if(name==="" || msg===""){
+        alert("Please enter your name and message.");
+        return;
+    }
+
+    let box=document.createElement("div");
+    box.className="message";
+    box.innerHTML="<b>"+name+"</b><br>"+msg;
+
+    document.getElementById("messages").appendChild(box);
+
+    document.getElementById("name").value="";
+    document.getElementById("msg").value="";
+}
+
+</script>
+
+</body>
+  </html>
